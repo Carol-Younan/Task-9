@@ -414,8 +414,6 @@ function edit(index) {
   `;
 
   profile.value = null;
-
-  clear();
 }
 
 searchBar.addEventListener("input", search);
