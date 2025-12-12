@@ -159,7 +159,7 @@ function displayfavs() {
   var output = "";
   var haveFav = false;
 
-  output+=`<div class="boxCard active">`;
+  output += `<div class="boxCard active">`;
   for (var i = 0; i < contacts.length; i++) {
     if (contacts[i].isFavorite === true) {
       haveFav = true;
@@ -180,7 +180,7 @@ function displayfavs() {
       `;
     }
   }
-  output+=`</div>`
+  output += `</div>`;
 
   if (!haveFav) {
     noFav.innerHTML = `<p class="boxCard">No Favorites Yet</p>`;
@@ -194,7 +194,7 @@ function displayemergs() {
   var output = "";
   var haveEmerg = false;
 
-  output+=`<div class="boxCard active">`;
+  output += `<div class="boxCard active">`;
   for (var i = 0; i < contacts.length; i++) {
     if (contacts[i].isEmergency === true) {
       haveEmerg = true;
@@ -215,7 +215,7 @@ function displayemergs() {
       `;
     }
   }
-  output+=`</div>`;
+  output += `</div>`;
 
   if (!haveEmerg) {
     noEmerg.innerHTML = `<p class="boxCard">No Emergency Contacts</p>`;
@@ -236,13 +236,25 @@ function display() {
     contain += `<div class="col-12 col-sm-6 col-xl-6 mb-2">
                   <div class="card p-3">
                   <div class="d-flex gap-3 mb-2">
-                  <div class="imgContact position-relative" id="imgContact"><img src="${contacts[i].image}" class="w-100 rounded-3">
-                   ${contacts[i].isFavorite ? `<span class="fav-icon"><i class="fa-solid fa-star"></i></span>` : ""}
-                   ${contacts[i].isEmergency ? `<span class="emerg-icon"><i class="fa-solid fa-heart-pulse"></i></span>` : ""}
+                  <div class="imgContact position-relative" id="imgContact"><img src="${
+                    contacts[i].image
+                  }" class="w-100 rounded-3">
+                   ${
+                     contacts[i].isFavorite
+                       ? `<span class="fav-icon"><i class="fa-solid fa-star"></i></span>`
+                       : ""
+                   }
+                   ${
+                     contacts[i].isEmergency
+                       ? `<span class="emerg-icon"><i class="fa-solid fa-heart-pulse"></i></span>`
+                       : ""
+                   }
                   </div>
                   <div>
                   <p class="m-0 name">${contacts[i].contactName}</p>
-                  <p class="d-flex m-0 gap-2 align-items-center fontnumber"><i class="fa-solid fa-phone phoneicon rounded-3"></i>${contacts[i].contactNum}</p>
+                  <p class="d-flex m-0 gap-2 align-items-center fontnumber"><i class="fa-solid fa-phone phoneicon rounded-3"></i>${
+                    contacts[i].contactNum
+                  }</p>
                   </div>
                   </div> `;
     if (contacts[i].contactEmail !== "") {
@@ -396,12 +408,14 @@ function edit(index) {
   contactFav.checked = contacts[index].isFavorite;
   contactEmerg.checked = contacts[index].isEmergency;
 
-  avatarPreview.classList.replace("rounded-circle","rounded-4")
+  avatarPreview.classList.replace("rounded-circle", "rounded-4");
   avatarPreview.innerHTML = `
     <img id="previewImage" src="${contacts[index].image}" class="preview-avatar rounded-4" />
   `;
 
-  profile.value=null;
+  profile.value = null;
+
+  clear();
 }
 
 searchBar.addEventListener("input", search);
@@ -413,72 +427,84 @@ function search() {
 
   for (var i = 0; i < contacts.length; i++) {
     if (contacts[i].contactName.toLowerCase().includes(word.toLowerCase())) {
-      contain +=  `<div class="col-12 col-sm-6 col-xl-6 mb-2">
+      contain += `<div class="col-12 col-sm-6 col-xl-6 mb-2">
                   <div class="card p-3">
                   <div class="d-flex gap-3 mb-2">
-                  <div class="imgContact position-relative" id="imgContact"><img src="${contacts[i].image}" class="w-100 rounded-3">
-                   ${contacts[i].isFavorite ? `<span class="fav-icon"><i class="fa-solid fa-star"></i></span>` : ""}
-                   ${contacts[i].isEmergency ? `<span class="emerg-icon"><i class="fa-solid fa-heart-pulse"></i></span>` : ""}
+                  <div class="imgContact position-relative" id="imgContact"><img src="${
+                    contacts[i].image
+                  }" class="w-100 rounded-3">
+                   ${
+                     contacts[i].isFavorite
+                       ? `<span class="fav-icon"><i class="fa-solid fa-star"></i></span>`
+                       : ""
+                   }
+                   ${
+                     contacts[i].isEmergency
+                       ? `<span class="emerg-icon"><i class="fa-solid fa-heart-pulse"></i></span>`
+                       : ""
+                   }
                   </div>
                   <div>
                   <p class="m-0 name">${contacts[i].contactName}</p>
-                  <p class="d-flex m-0 gap-2 align-items-center fontnumber"><i class="fa-solid fa-phone phoneicon rounded-3"></i>${contacts[i].contactNum}</p>
+                  <p class="d-flex m-0 gap-2 align-items-center fontnumber"><i class="fa-solid fa-phone phoneicon rounded-3"></i>${
+                    contacts[i].contactNum
+                  }</p>
                   </div>
                   </div> `;
-    if (contacts[i].contactEmail !== "") {
-      contain += `
+      if (contacts[i].contactEmail !== "") {
+        contain += `
                   <div class="d-flex align-items-center mb-2">
                     <p class="d-flex m-0 gap-2 align-items-center fontnumber"><i class="fa-solid fa-envelope mailicon rounded-3"></i>${contacts[i].contactEmail}</p>
                   </div>`;
-    }
-    if (contacts[i].contactAddress !== "") {
-      contain += `<div class="d-flex align-items-center mb-2">
+      }
+      if (contacts[i].contactAddress !== "") {
+        contain += `<div class="d-flex align-items-center mb-2">
                     <p class="d-flex m-0 gap-2 align-items-center fontnumber"><i class="fa-solid fa-location-dot locationicon rounded-3"></i>${contacts[i].contactAddress}</p>
                   </div>`;
-    }
-    contain += `<div class="d-flex gap-2">`;
-    if (contacts[i].contactGroup !== "") {
-      contain += `<p class="group">${contacts[i].contactGroup}</p>`;
-    }
-    if (contacts[i].isEmergency === true) {
-      contain += `
+      }
+      contain += `<div class="d-flex gap-2">`;
+      if (contacts[i].contactGroup !== "") {
+        contain += `<p class="group">${contacts[i].contactGroup}</p>`;
+      }
+      if (contacts[i].isEmergency === true) {
+        contain += `
           <p class="emerg"><i class="fa-solid fa-heart-pulse"></i> Emergency</p>`;
-    }
-    contain += `</div>
+      }
+      contain += `</div>
     <div class="footer d-flex justify-content-between align-items-center">
       <div class="d-flex gap-2">
         <a href="tel:${contacts[i].contactNum}">
           <i class="fa-solid fa-phone phoneicon rounded-3 green"></i>
         </a>`;
-    if (contacts[i].contactEmail !== "") {
-      contain += `<a href="mailto:${contacts[i].contactEmail}">
+      if (contacts[i].contactEmail !== "") {
+        contain += `<a href="mailto:${contacts[i].contactEmail}">
           <i class="fa-solid fa-envelope mailicon rounded-3 purple"></i>
         </a>`;
-    }
-    contain += `</div>`;
-    if (contacts[i].isFavorite == true) {
-      contain += ` <div class="d-flex gap-2 align-items-center">
+      }
+      contain += `</div>`;
+      if (contacts[i].isFavorite == true) {
+        contain += ` <div class="d-flex gap-2 align-items-center">
         <button class="bg-white border-0 d-flex align-items-center justify-content-center" onClick="toggleFavourite(${i})">
           <i class="fa-solid fa-star star active rounded-3"></i> </i>
         </button>`;
-    } else {
-      contain += ` <div class="d-flex gap-2 align-items-center">
+      } else {
+        contain += ` <div class="d-flex gap-2 align-items-center">
       <button class="bg-white border-0 d-flex align-items-center justify-content-center" onClick="toggleFavourite(${i})">
         <i class="fa-regular fa-star rounded-3 star"></i>
       </button>
     `;
-    }
-    if (contacts[i].isEmergency == true) {
-      contain += `<button class="bg-white border-0 d-flex align-items-center justify-content-center"  onClick="toggleEmergency(${i})">
+      }
+      if (contacts[i].isEmergency == true) {
+        contain += `<button class="bg-white border-0 d-flex align-items-center justify-content-center"  onClick="toggleEmergency(${i})">
         <i class="fa-solid fa-heart-pulse rounded-3 active heart"></i>
       </button>
     `;
-    } else {
-      contain += `<button class="bg-white border-0 d-flex align-items-center justify-content-center" onClick="toggleEmergency(${i})">
+      } else {
+        contain += `<button class="bg-white border-0 d-flex align-items-center justify-content-center" onClick="toggleEmergency(${i})">
         <i class="fa-regular fa-heart rounded-3 heart"></i>
       </button>`;
-    }
-    contain += `<button class="bg-white border-0 d-flex align-items-center justify-content-center" onClick="edit(${i})">
+      }
+      contain += `<button class="bg-white border-0 d-flex align-items-center justify-content-center" onClick="edit(${i})">
           <i class="fa-solid fa-pen rounded-3 pen"></i>
         </button>
 
